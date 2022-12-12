@@ -147,12 +147,16 @@ module.exports = {
     * > Be sure to use the right protocol!  ("http://" vs. "https://")         *
     *                                                                          *
     ***************************************************************************/
+    // cors: {
+    //   // allowOrigins: [
+    //   //   'https://example.com',
+    //   // ]
+    // },
     cors: {
-      // allowOrigins: [
-      //   'https://example.com',
-      // ]
-    },
-
+    allRoutes: true,
+    allowOrigins: '*',
+    allowCredentials: false,
+  },
   },
 
 
