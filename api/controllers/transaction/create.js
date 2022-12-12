@@ -90,6 +90,10 @@ module.exports = {
                         idBuyer: inputs.idBuyer,
                         purchasedStock: inputs.purchasedStock
                     }).fetch();
+                } else {
+                    return exits.error({
+                        message: 'Id buyer is required'
+                    });
                 }
             }
 
