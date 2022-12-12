@@ -9,6 +9,9 @@ module.exports = {
             type: 'number',
             required: true
         },
+        name: {
+            type: 'string',
+        },
         totalStocks: {
             type: 'number',
         },
