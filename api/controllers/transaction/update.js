@@ -33,7 +33,7 @@ module.exports = {
             description: 'Success Update',
         },
         error: {
-            statusCode: 400,
+            statusCode: 404,
             description: 'Error',
         },
         notRole: {

@@ -26,7 +26,7 @@ module.exports = {
             description: 'Success Create',
         },
         error: {
-            statusCode: 400,
+            statusCode: 404,
             description: 'Error',
         },
         notRole: {

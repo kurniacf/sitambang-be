@@ -13,7 +13,7 @@ module.exports = {
             description: 'Success View',
         },
         error: {
-            statusCode: 400,
+            statusCode: 404,
             description: 'Error',
         },
         notRole: {

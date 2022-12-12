@@ -17,7 +17,7 @@ module.exports = {
             description: 'Success delete',
         },
         error: {
-            statusCode: 400,
+            statusCode: 404,
             description: 'Error',
         },
         notRole: {
