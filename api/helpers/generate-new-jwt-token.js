@@ -31,7 +31,7 @@ module.exports = {
         iss: 'kurniacf SailsJS API',
         };
 
-        const secret = sails.config.JWT_SECRET || process.env.JWT_SECRET;
+        const secret = sails.config.JWT_SECRET || process.env.JWT_SECRET || 'secret';
         const token = jwt.sign(payload, secret, { expiresIn: '1d' });
         return token;
     },

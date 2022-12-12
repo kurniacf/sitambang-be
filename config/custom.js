@@ -19,4 +19,8 @@ module.exports.custom = {
   // stripeSecret: 'sk_test_Zzd814nldl91104qor5911gjald',
   // …
 
+  emailProofTokenTTL: 24 * 60 * 60 * 1000, // 24 hours
+  //baseUrl: 'http://167.71.210.149:1337',
+  //baseUrl: 'https://kurniacfapi.online',
+  passwordResetTokenTTL: 24 * 60 * 60 * 1000, // 24 hours
 };

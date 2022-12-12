@@ -19,7 +19,7 @@ module.exports = {
     },
 
     fn: async function (inputs) {
-        const secret = sails.config.JWT_SECRET || process.env.JWT_SECRET;
+        const secret = sails.config.JWT_SECRET || process.env.JWT_SECRET || 'secret';
         const payload = jwt.verify(inputs.token, secret, { expiresIn: '1d' });
         return payload;
     },
