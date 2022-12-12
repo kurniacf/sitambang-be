@@ -14,6 +14,9 @@ module.exports = {
         },
         purchasedStock: {
             type: 'number',
+        },
+        idBuyer : {
+            type: 'number',
         }
     },
 
@@ -43,13 +46,14 @@ module.exports = {
             let token = credential[1];
             const data = await sails.helpers.decodeJwtToken(token);
 
-            if (data.role !== 'employee' && data.role !== 'admin' && data.role !== 'buyer') {
+            if (data.role !== 'buyer' && data.role !== 'admin' && data.role !== 'employee') {
                 return exits.notRole({
                     message: 'Dont not access role'
                 });
             }
 
             let stockData = await Stocks.findOne({ id: inputs.idStock });
+            let transaction;
 
             if (inputs.purchasedStock > stockData.stock) {
                 return exits.notEnoughStock({
@@ -59,15 +63,35 @@ module.exports = {
 
             let totalPayment = stockData.priceStock * inputs.purchasedStock;
 
-            let transaction = await Transaction.create({
-                totalPayment: totalPayment,
-                paymentMethod: inputs.paymentMethod,
-                statusPayment: 'pending',
-                paymentImage: null,
-                idStock: inputs.idStock,
-                idBuyer: data.id,
-                purchasedStock: inputs.purchasedStock
-            }).fetch();
+            if(data.role === 'buyer') {
+                if(inputs.idBuyer) {
+                    return exits.error({
+                        message: 'You dont have access to change buyer'
+                    });
+                } else {
+                    transaction = await Transaction.create({
+                        totalPayment: totalPayment,
+                        paymentMethod: inputs.paymentMethod,
+                        statusPayment: 'pending',
+                        paymentImage: null,
+                        idStock: inputs.idStock,
+                        idBuyer: data.id,
+                        purchasedStock: inputs.purchasedStock
+                    }).fetch();
+                }
+            } else {
+                if(inputs.idBuyer) {
+                    transaction = await Transaction.create({
+                        totalPayment: totalPayment,
+                        paymentMethod: inputs.paymentMethod,
+                        statusPayment: 'pending',
+                        paymentImage: null,
+                        idStock: inputs.idStock,
+                        idBuyer: inputs.idBuyer,
+                        purchasedStock: inputs.purchasedStock
+                    }).fetch();
+                }
+            }
 
             return exits.success({
                 message: `Success create transaction`,
