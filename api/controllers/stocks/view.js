@@ -5,9 +5,6 @@ module.exports = {
     description: 'View stock information',
 
     inputs: {
-        id: {
-            type: 'number'
-        }
     },
 
     exits: {
@@ -38,8 +35,10 @@ module.exports = {
                 });
             }
 
-            if (inputs.id) {
-                let stockData = await Stocks.findOne({ id: inputs.id });
+            let idStock = this.req.param('id');
+
+            if (idStock) {
+                let stockData = await Stocks.findOne({ id: idStock });
 
                 if (!stockData) {
                     return exits.error({

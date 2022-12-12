@@ -42,13 +42,15 @@ module.exports.routes = {
 
     // POND TOOLS
     'POST /pondtool/create': 'pond-tools/create',
-    'POST /pondtool/view': 'pond-tools/view',
+    'GET /pondtool/view/': 'pond-tools/view',
+    'GET /pondtool/view/:id': 'pond-tools/view',
     'POST /pondtool/update': 'pond-tools/update',
     'POST /pondtool/delete': 'pond-tools/delete',
 
     // STOCKS
     'POST /stock/create': 'stocks/create',
-    'POST /stock/view': 'stocks/view',
+    'GET /stock/view/': 'stocks/view',
+    'GET /stock/view/:id': 'stocks/view',
     'POST /stock/update': 'stocks/update',
     'POST /stock/delete': 'stocks/delete',
 };

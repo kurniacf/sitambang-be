@@ -5,9 +5,6 @@ module.exports = {
     description: 'View pond tools.',
 
     inputs: {
-        id: {
-            type: 'number'
-        }
     },
 
     exits: {
@@ -32,14 +29,16 @@ module.exports = {
             let token = credential[1];
             const data = await sails.helpers.decodeJwtToken(token);
 
+            let idPondTool = this.req.param('id');
+
             if (data.role !== 'employee' && data.role !== 'admin' && data.role !== 'buyer') {
                 return exits.notRole({
                     message: 'Dont not access role'
                 });
             }
 
-            if (inputs.id) {
-                let pondTool = await PondTools.findOne({ id: inputs.id });
+            if (idPondTool) {
+                let pondTool = await PondTools.findOne({ id: idPondTool });
 
                 if (!pondTool) {
                     return exits.error({
