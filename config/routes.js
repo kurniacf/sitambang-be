@@ -53,4 +53,7 @@ module.exports.routes = {
     'GET /stock/view/:id': 'stocks/view',
     'POST /stock/update': 'stocks/update',
     'POST /stock/delete': 'stocks/delete',
+
+    // TRANSACTIONS
+    'POST /transaction/create': 'transaction/create',
 };
