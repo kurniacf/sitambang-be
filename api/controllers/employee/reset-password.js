@@ -6,27 +6,27 @@ module.exports = {
 
     inputs: {
         password: {
-        description: 'The new, unencrypted password.',
-        example: 'myfancypassword',
-        required: true,
+            description: 'The new, unencrypted password.',
+            example: 'myfancypassword',
+            required: true,
         },
         token: {
-        description:
-            'The password token that was in the forgot-password endpoint',
-        example: 'gwa8gs8hgw9h2g9hg29',
-        required: true,
+            description:
+                'The password token that was in the forgot-password endpoint',
+            example: 'gwa8gs8hgw9h2g9hg29',
+            required: true,
         },
     },
 
     exits: {
         success: {
-        description:
-            'Password successfully updated, and requesting user agent automatically logged in',
-        },
-        invalidToken: {
-        statusCode: 401,
-        description:
-            'The provided password token is invalid, expired, or has already been used.',
+            description:
+                'Password successfully updated, and requesting user agent automatically logged in',
+            },
+            invalidToken: {
+            statusCode: 401,
+            description:
+                'The provided password token is invalid, expired, or has already been used.',
         },
     },
 
@@ -50,19 +50,19 @@ module.exports = {
         );
 
         await Employee.updateOne({ id: employeeDB.id }).set({
-        password: hashedPassword,
-        passwordResetToken: '',
-        passwordResetTokenExpiresAt: 0,
+            password: hashedPassword,
+            passwordResetToken: '',
+            passwordResetTokenExpiresAt: 0,
         });
 
         const token = await sails.helpers.generateNewJwtToken(employeeDB.email, employeeDB.id, 'employee');
 
         this.req.employeeDB = employeeDB;
         return exits.success({
-        message: `Password reset successful. ${employeeDB.email} has been logged in`,
-        data: employeeDB,
-        role: 'employee',
-        token,
+            message: `Password reset successful. ${employeeDB.email} has been logged in`,
+            data: employeeDB,
+            role: 'employee',
+            token,
         });
     }
 };

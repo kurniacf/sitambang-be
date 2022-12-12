@@ -31,7 +31,10 @@ module.exports = {
 
     fn: async function (inputs, exits) {
         try {
-            const data = await sails.helpers.decodeJwtToken(inputs.token);
+            let credential = this.req.headers.authorization.split(' ');
+
+            let token = credential[1];
+            const data = await sails.helpers.decodeJwtToken(token);
 
             if (data.role === 'buyer') {
                 return exits.notRole({

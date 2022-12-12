@@ -5,10 +5,6 @@ module.exports = {
     description: 'Update Data Buyer',
 
     inputs: {
-        token: {
-            required: true,
-            type: 'string',
-        },
         buyerId: {
             type: 'number',
         },
@@ -41,7 +37,10 @@ module.exports = {
 
     fn: async function (inputs, exits) {
         try {
-            const data = await sails.helpers.decodeJwtToken(inputs.token);
+            let credential = this.req.headers.authorization.split(' ');
+
+            let tokenHeader = credential[1];
+            const data = await sails.helpers.decodeJwtToken(tokenHeader);
 
             if (!data) {
                 return exits.notRole({
