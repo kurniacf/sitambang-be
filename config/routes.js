@@ -46,4 +46,9 @@ module.exports.routes = {
     'POST /pondtool/update': 'pond-tools/update',
     'POST /pondtool/delete': 'pond-tools/delete',
 
+    // STOCKS
+    'POST /stock/create': 'stocks/create',
+    'POST /stock/view': 'stocks/view',
+    'POST /stock/update': 'stocks/update',
+    'POST /stock/delete': 'stocks/delete',
 };

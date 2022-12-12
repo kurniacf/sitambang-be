@@ -1,20 +1,26 @@
 module.exports = {
 
-    friendlyName: 'Delete',
+    friendlyName: 'Update',
 
-    description: 'Delete pond tool.',
+    description: 'Update stock',
 
     inputs: {
         id: {
             type: 'number',
             required: true
         },
+        totalStocks: {
+            type: 'number',
+        },
+        priceStock: {
+            type: 'number',
+        }
     },
 
     exits: {
         success: {
             statusCode: 200,
-            description: 'Success delete',
+            description: 'Success update',
         },
         error: {
             statusCode: 500,
@@ -23,10 +29,6 @@ module.exports = {
         notRole: {
             statusCode: 404,
             description: 'Role not employee'
-        },
-        failDeleted: {
-            statusCode: 404,
-            description: 'Fail deleted'
         }
     },
 
@@ -35,32 +37,30 @@ module.exports = {
             let credential = this.req.headers.authorization.split(' ');
 
             let token = credential[1];
-
             const data = await sails.helpers.decodeJwtToken(token);
 
             if (data.role === 'buyer') {
                 return exits.notRole({
-                    message: 'Role not employee or admin'
+                message: 'Role not employee or admin'
                 });
             }
 
-            let pondToolData = await PondTools.findOne({ id: inputs.id });
+            await Stocks.updateOne({ id: inputs.id }).set({
+                name: inputs.name,
+                totalStocks: inputs.totalStocks,
+                priceStock: inputs.priceStock,
+            });
 
-            if (!pondToolData) {
-                return exits.error({
-                message: 'Pond tool not found'
-                });
-            }
-
-            await PondTools.destroyOne({ id: inputs.id });
+            let stock = await Stocks.findOne({ id: inputs.id });
 
             return exits.success({
-                message: `Success delete pond tool`
+                message: `Success update stock`,
+                data: stock
             });
 
         } catch (error) {
             return exits.error({
-                message: `Error delete pond tool`,
+                message: `Error update stock`,
                 error: error.message
             });
         }

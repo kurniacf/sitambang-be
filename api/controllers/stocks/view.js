@@ -2,7 +2,7 @@ module.exports = {
 
     friendlyName: 'View',
 
-    description: 'View pond tools.',
+    description: 'View stock information',
 
     inputs: {
         id: {
@@ -21,7 +21,7 @@ module.exports = {
         },
         notRole: {
             statusCode: 404,
-            description: 'Role not employee'
+            description: 'Role not access'
         }
     },
 
@@ -39,24 +39,24 @@ module.exports = {
             }
 
             if (inputs.id) {
-                let pondTool = await PondTools.findOne({ id: inputs.id });
+                let stockData = await Stocks.findOne({ id: inputs.id });
 
-                if (!pondTool) {
+                if (!stockData) {
                     return exits.error({
-                        message: 'Pond tool not found'
+                        message: 'Stock not found'
                     });
                 } else {
                     return exits.success({
-                        message: `Success view pond`,
-                        data: pondTool
+                        message: `Success view stock`,
+                        data: stockData
                     });
                 }
             } else {
-                let pondTools = await PondTools.find();
+                let stocksData = await Stocks.find();
 
                 return exits.success({
-                message: `Success view all pond`,
-                data: pondTools
+                    message: `Success view all stocks`,
+                    data: stocksData
                 });
             }
         } catch (error) {

@@ -38,7 +38,7 @@ module.exports = {
 
             if (data.role === 'buyer') {
                 return exits.notEmployee({
-                message: 'Role not employee or admin'
+                    message: 'Role not employee or admin'
                 });
             }
 

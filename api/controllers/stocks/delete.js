@@ -2,7 +2,7 @@ module.exports = {
 
     friendlyName: 'Delete',
 
-    description: 'Delete pond tool.',
+    description: 'Delete Stock',
 
     inputs: {
         id: {
@@ -40,27 +40,27 @@ module.exports = {
 
             if (data.role === 'buyer') {
                 return exits.notRole({
-                    message: 'Role not employee or admin'
+                message: 'Role not employee or admin'
                 });
             }
 
-            let pondToolData = await PondTools.findOne({ id: inputs.id });
+            let stockData = await Stocks.findOne({ id: inputs.id });
 
-            if (!pondToolData) {
+            if (!stockData) {
                 return exits.error({
-                message: 'Pond tool not found'
+                    message: 'Stock not found'
                 });
             }
 
-            await PondTools.destroyOne({ id: inputs.id });
+            await Stocks.destroyOne({ id: inputs.id });
 
             return exits.success({
-                message: `Success delete pond tool`
+                message: `Success delete stock`
             });
 
         } catch (error) {
             return exits.error({
-                message: `Error delete pond tool`,
+                message: `Error delete stock`,
                 error: error.message
             });
         }
