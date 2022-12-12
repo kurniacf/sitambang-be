@@ -22,5 +22,28 @@ module.exports.routes = {
     'POST /admin/update': 'admin/update',
     'POST /admin/delete': 'admin/delete',
 
-    
+    // EMPLOYEE
+    'POST /employee/register': 'employee/register',
+    'POST /employee/login': 'employee/login',
+    'POST /employee/forgot-password': 'employee/forgot-password',
+    'POST /employee/reset-password': 'employee/reset-password',
+    'POST /employee/view': 'employee/view',
+    'POST /employee/update': 'employee/update',
+    'POST /employee/delete': 'employee/delete',
+
+    // BUYER
+    'POST /buyer/register': 'buyer/register',
+    'POST /buyer/login': 'buyer/login',
+    'POST /buyer/forgot-password': 'buyer/forgot-password',
+    'POST /buyer/reset-password': 'buyer/reset-password',
+    'POST /buyer/view': 'buyer/view',
+    'POST /buyer/update': 'buyer/update',
+    'POST /buyer/delete': 'buyer/delete',
+
+    // POND TOOLS
+    'POST /pondtool/create': 'pond-tools/create',
+    'POST /pondtool/view': 'pond-tools/view',
+    'POST /pondtool/update': 'pond-tools/update',
+    'POST /pondtool/delete': 'pond-tools/delete',
+
 };
