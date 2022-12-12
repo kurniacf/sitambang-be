@@ -25,7 +25,7 @@ module.exports = {
             description: 'Success Create',
         },
         error: {
-            statusCode: 500,
+            statusCode: 400,
             description: 'Error',
         },
         notEmployee: {

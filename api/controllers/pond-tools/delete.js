@@ -17,7 +17,7 @@ module.exports = {
             description: 'Success delete',
         },
         error: {
-            statusCode: 500,
+            statusCode: 400,
             description: 'Error',
         },
         notRole: {
