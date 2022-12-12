@@ -5,10 +5,6 @@ module.exports = {
     description: 'Update pond tools.',
 
     inputs: {
-        token: {
-            required: true,
-            type: 'string',
-        },
         id: {
             type: 'number',
             required: true
