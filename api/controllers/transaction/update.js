@@ -68,6 +68,8 @@ module.exports = {
             }
 
             let transactionData = await Transaction.findOne({ id: inputs.idTransaction });
+            let stockData = await Stocks.findOne({ id: inputs.idStock });
+            let transaction;
 
             if (!transactionData) {
                 return exits.notFound({
@@ -81,12 +83,7 @@ module.exports = {
                 });
             }
 
-            let transaction;
-
             if (data.role === 'buyer') {
-
-                let stockData = await Stocks.findOne({ id: inputs.idStock });
-
                 if (inputs.statusPayment === 'confirmed') {
                     return exits.notChangeStatus({
                         message: 'Status not change becaus role not access'
@@ -102,6 +99,12 @@ module.exports = {
                     purchasedStock: inputs.purchasedStock,
                 });
             } else {
+                if (inputs.statusPayment === 'confirmed') {
+                    await Stocks.updateOne({ id: inputs.idStock }).set({
+                        stock: stockData.stock - inputs.purchasedStock
+                    });
+                }
+
                 transaction = await Transaction.updateOne({ id: inputs.idTransaction }).set({
                     totalPayment: stockData.priceStock * inputs.purchasedStock,
                     paymentMethod: inputs.paymentMethod,
