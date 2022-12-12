@@ -10,8 +10,17 @@
 
 module.exports.routes = {
 
+    // AUTHENTICATION
+    'POST /auth/check-account': 'authentication/check-account',
+
     // ADMIN
     'POST /admin/register': 'admin/register',
     'POST /admin/login': 'admin/login',
+    'POST /admin/forgot-password': 'admin/forgot-password',
+    'POST /admin/reset-password': 'admin/reset-password',
+    'POST /admin/view': 'admin/view',
+    'POST /admin/update': 'admin/update',
+    'POST /admin/delete': 'admin/delete',
 
+    
 };
