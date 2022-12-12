@@ -5,10 +5,6 @@ module.exports = {
     description: 'View Employee',
 
     inputs: {
-        token: {
-            required: true,
-            type: 'string',
-        },
         employeeId: {
             type: 'number'
         }

@@ -6,10 +6,6 @@ module.exports = {
     description: 'Update Data Employee',
 
     inputs: {
-        token: {
-            required: true,
-            type: 'string',
-        },
         employeId: {
             type: 'number',
         },
