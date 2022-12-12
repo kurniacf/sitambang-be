@@ -2,13 +2,9 @@ module.exports = {
 
     friendlyName: 'Delete',
 
-    description: 'Delete pond tools.',
+    description: 'Delete pond tool.',
 
     inputs: {
-        token: {
-            required: true,
-            type: 'string',
-        },
         id: {
             type: 'number',
             required: true
@@ -36,7 +32,11 @@ module.exports = {
 
     fn: async function (inputs, exits) {
         try {
-            const data = await sails.helpers.decodeJwtToken(inputs.token);
+            let credential = this.req.headers.authorization.split(' ');
+
+            let token = credential[1];
+
+            const data = await sails.helpers.decodeJwtToken(token);
 
             if (data.role === 'buyer') {
                 return exits.notRole({

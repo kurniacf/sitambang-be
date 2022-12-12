@@ -5,16 +5,12 @@ module.exports = {
     description: 'Delete Admin',
 
     inputs: {
-        token: {
-            required: true,
-            type: 'string',
-        }
     },
 
     exits: {
         success: {
             statusCode: 200,
-            description: 'Success update',
+            description: 'Success delete',
         },
         error: {
             statusCode: 500,
@@ -29,7 +25,10 @@ module.exports = {
 
     fn: async function (inputs, exits) {
         try {
-            const data = await sails.helpers.decodeJwtToken(inputs.token);
+            let credential = this.req.headers.authorization.split(' ');
+
+            let token = credential[1];
+            const data = await sails.helpers.decodeJwtToken(token);
 
             if (data.role === 'buyer' || data.role === 'employee') {
                 return exits.notRole({

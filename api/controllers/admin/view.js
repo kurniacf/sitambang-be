@@ -5,10 +5,6 @@ module.exports = {
     description: 'View Admin',
 
     inputs: {
-        token: {
-            required: true,
-            type: 'string',
-        },
         id: {
             type: 'number'
         }
@@ -31,7 +27,10 @@ module.exports = {
 
     fn: async function (inputs, exits) {
         try {
-            const data = await sails.helpers.decodeJwtToken(inputs.token);
+            let credential = this.req.headers.authorization.split(' ');
+
+            let token = credential[1];
+            const data = await sails.helpers.decodeJwtToken(token);
 
             if (data.role === 'employee' || data.role === 'buyer') {
                 return exits.notRole({
