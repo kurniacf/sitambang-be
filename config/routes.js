@@ -56,4 +56,6 @@ module.exports.routes = {
 
     // TRANSACTIONS
     'POST /transaction/create': 'transaction/create',
+    'POST /transaction/update': 'transaction/update',
+    'POST /transaction/delete': 'transaction/delete',
 };
