@@ -11,12 +11,16 @@ module.exports = {
         },
         idStock : {
             type: 'number',
+            required: true,
         },
         purchasedStock: {
             type: 'number',
         },
         idBuyer : {
             type: 'number',
+        },
+        paymentImage : {
+            type: 'string',
         }
     },
 
@@ -73,7 +77,7 @@ module.exports = {
                         totalPayment: totalPayment,
                         paymentMethod: inputs.paymentMethod,
                         statusPayment: 'pending',
-                        paymentImage: null,
+                        paymentImage: inputs.paymentImage,
                         idStock: inputs.idStock,
                         idBuyer: data.id,
                         purchasedStock: inputs.purchasedStock
@@ -85,7 +89,7 @@ module.exports = {
                         totalPayment: totalPayment,
                         paymentMethod: inputs.paymentMethod,
                         statusPayment: 'pending',
-                        paymentImage: null,
+                        paymentImage: inputs.paymentImage,
                         idStock: inputs.idStock,
                         idBuyer: inputs.idBuyer,
                         purchasedStock: inputs.purchasedStock
