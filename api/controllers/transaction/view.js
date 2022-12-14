@@ -35,24 +35,20 @@ module.exports = {
                 });
             }
 
-            let idStock = this.req.param('id');
+            let idTransaction = this.req.param('id_transaction');
+            let idBuyer = this.req.param('id_buyer');
 
-            if(idStock) {
+            // View By ID Transaction
+            if(idTransaction) {
                 if(data.role === 'buyer') {
-                    let transactionData = await Transaction.find({ idBuyer: data.id });
-
-                    if (idStock !== data.id) {
-                        return exits.notRole({
-                            message: 'Dont not access role'
-                        });
-                    }
+                    let transactionData = await Transaction.find({ idBuyer: data.id, id: idTransaction});
 
                     return exits.success({
                         message: `Success view transaction buyer`,
                         data: transactionData
                     });
                 } else {
-                    let transactionData = await Transaction.find({ idBuyer: idStock });
+                    let transactionData = await Transaction.find({ idBuyer: idBuyer, id: idTransaction});
 
                     return exits.success({
                         message: `Success view transaction`,
@@ -65,6 +61,15 @@ module.exports = {
 
                     return exits.success({
                         message: `Success view transaction buyer`,
+                        data: transactionData
+                    });
+                }
+
+                if(idBuyer) {
+                    let transactionData = await Transaction.find({ idBuyer: idBuyer });
+
+                    return exits.success({
+                        message: `Success view transaction`,
                         data: transactionData
                     });
                 }
