@@ -38,17 +38,17 @@ module.exports = {
             let idEmployee = this.req.param('id');
 
             if (idEmployee) {
-                let employeeDB = await Buyer.findOne({ id: idEmployee });
+                let employeeDB = await Employee.findOne({ id: idEmployee });
 
                 return exits.success({
-                    message: `Success view Buyer`,
+                    message: `Success view Employee`,
                     data: employeeDB
                 });
             } else {
-                let employeeDB = await Buyer.find();
+                let employeeDB = await Employee.find();
 
                 return exits.success({
-                    message: `Success view all Buyer`,
+                    message: `Success view all Employee`,
                     data: employeeDB
                 });
             }
