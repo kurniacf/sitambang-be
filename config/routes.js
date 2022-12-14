@@ -60,4 +60,5 @@ module.exports.routes = {
     'POST /transaction/delete': 'transaction/delete',
     'GET /transaction/view/': 'transaction/view',
     'GET /transaction/view/:id_transaction&:id_buyer': 'transaction/view',
+    'GET /transaction/view-confirmed/:id_buyer': 'transaction/view-confirmed',
 };
