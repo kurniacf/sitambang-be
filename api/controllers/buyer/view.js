@@ -38,7 +38,7 @@ module.exports = {
             let idBuyer = this.req.param('id');
 
             if (idBuyer) {
-                let buyerDB = await Buyer.findOne({ id: inputs.buyerId });
+                let buyerDB = await Buyer.findOne({ id: idBuyer });
 
                 return exits.success({
                     message: `Success view Buyer`,
