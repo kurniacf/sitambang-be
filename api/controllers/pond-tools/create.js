@@ -52,7 +52,6 @@ module.exports = {
             }
 
             let pondTool = await PondTools.create({
-                name: inputs.name,
                 condition: inputs.condition,
                 idEmployee: data.id,
                 nameEmployee: employeeData.name
