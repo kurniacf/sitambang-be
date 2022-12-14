@@ -5,9 +5,6 @@ module.exports = {
     description: 'View Employee',
 
     inputs: {
-        employeeId: {
-            type: 'number'
-        }
     },
 
     exits: {
@@ -34,28 +31,24 @@ module.exports = {
 
             if (data.role === 'buyer') {
                 return exits.notRole({
-                    message: 'Dont not access role because not admin or employee'
+                    message: 'Dont not access role'
                 });
             }
 
-            if (inputs.employeeId) {
-                let employeeDB = await Employee.findOne({ id: inputs.employeeId });
+            let idEmployee = this.req.param('id');
 
-                if (!employeeDB) {
-                    return exits.error({
-                        message: 'Employee not found'
-                    });
-                } else {
-                    return exits.success({
-                        message: `Success view Employee`,
-                        data: employeeDB
-                    });
-                }
-            } else {
-                let employeeDB = await Employee.find();
+            if (idEmployee) {
+                let employeeDB = await Buyer.findOne({ id: idEmployee });
 
                 return exits.success({
-                    message: `Success view all Employee`,
+                    message: `Success view Buyer`,
+                    data: employeeDB
+                });
+            } else {
+                let employeeDB = await Buyer.find();
+
+                return exits.success({
+                    message: `Success view all Buyer`,
                     data: employeeDB
                 });
             }
