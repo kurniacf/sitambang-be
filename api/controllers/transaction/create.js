@@ -13,11 +13,17 @@ module.exports = {
             type: 'number',
             required: true,
         },
+        nameStock: {
+            type: 'string',
+        },
         purchasedStock: {
             type: 'number',
         },
         idBuyer : {
             type: 'number',
+        },
+        nameBuyer : {
+            type: 'string',
         },
         paymentImage : {
             type: 'string',
@@ -56,43 +62,57 @@ module.exports = {
                 });
             }
 
-            let stockData = await Stocks.findOne({ id: inputs.idStock });
+            let stockData;
+            let buyerData;
             let transaction;
-
-            if (inputs.purchasedStock > stockData.stock) {
-                return exits.notEnoughStock({
-                    message: 'Stock not enough'
-                });
-            }
-
-            let totalPayment = stockData.priceStock * inputs.purchasedStock;
 
             if(data.role === 'buyer') {
                 if(inputs.idBuyer) {
                     return exits.error({
                         message: 'You dont have access to change buyer'
                     });
-                } else {
-                    transaction = await Transaction.create({
-                        totalPayment: totalPayment,
-                        paymentMethod: inputs.paymentMethod,
-                        statusPayment: 'pending',
-                        paymentImage: inputs.paymentImage,
-                        idStock: inputs.idStock,
-                        idBuyer: data.id,
-                        purchasedStock: inputs.purchasedStock
-                    }).fetch();
                 }
+                stockData = await Stocks.findOne({ id: inputs.idStock });
+                buyerData = await Buyer.findOne({ id: data.id });
+
+                if (inputs.purchasedStock > stockData.stock) {
+                    return exits.notEnoughStock({
+                        message: 'Stock not enough'
+                    });
+                }
+
+                transaction = await Transaction.create({
+                    paymentMethod: inputs.paymentMethod,
+                    idStock: inputs.idStock,
+                    nameStock: stockData.name,
+                    idBuyer: buyerData.id,
+                    nameBuyer: buyerData.name,
+                    purchasedStock: inputs.purchasedStock,
+                    paymentImage: inputs.paymentImage,
+                    statusPayment: 'pending',
+                    totalPayment: stockData.priceStock * inputs.purchasedStock
+                }).fetch();
             } else {
                 if(inputs.idBuyer) {
+                    stockData = await Stocks.findOne({ id: inputs.idStock });
+                    buyerData = await Buyer.findOne({ id: inputs.idBuyer });
+
+                    if (inputs.purchasedStock > stockData.stock) {
+                        return exits.notEnoughStock({
+                            message: 'Stock not enough'
+                        });
+                    }
+
                     transaction = await Transaction.create({
-                        totalPayment: totalPayment,
                         paymentMethod: inputs.paymentMethod,
-                        statusPayment: 'pending',
-                        paymentImage: inputs.paymentImage,
                         idStock: inputs.idStock,
-                        idBuyer: inputs.idBuyer,
-                        purchasedStock: inputs.purchasedStock
+                        nameStock: stockData.name,
+                        idBuyer: buyerData.id,
+                        nameBuyer: buyerData.name,
+                        purchasedStock: inputs.purchasedStock,
+                        paymentImage: inputs.paymentImage,
+                        statusPayment: 'pending',
+                        totalPayment: stockData.priceStock * inputs.purchasedStock
                     }).fetch();
                 } else {
                     return exits.error({

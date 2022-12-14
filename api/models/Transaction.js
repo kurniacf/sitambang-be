@@ -33,9 +33,17 @@ module.exports = {
             model: 'stocks',
             columnName: 'id_stock'
         },
+        nameStock : {
+            type: 'string',
+            columnName: 'name_stock'
+        },
         idBuyer : {
             model: 'buyer',
             columnName: 'id_buyer'
+        },
+        nameBuyer : {
+            type: 'string',
+            columnName: 'name_buyer'
         },
         purchasedStock: {
             type: 'number',
