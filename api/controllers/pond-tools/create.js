@@ -29,6 +29,10 @@ module.exports = {
         notRole: {
             statusCode: 404,
             description: 'Role not access'
+        },
+        mustInput: {
+            statusCode: 404,
+            description: 'Must input id'
         }
     },
 
@@ -46,12 +50,23 @@ module.exports = {
                     message: 'Role not employee or admin'
                 });
             } else if (data.role === 'employee') {
+                if(inputs.idEmployee)  {
+                    return exits.notRole({
+                        message: 'Role not admin'
+                    });
+                }
                 employeeData = await Employee.findOne({ id: data.id });
             } else if (data.role === 'admin') {
+                if (!inputs.idEmployee) {
+                    return exits.mustInput({
+                        message: 'must input id employee'
+                    });
+                }
                 employeeData = await Employee.findOne({ id: inputs.idEmployee });
             }
 
             let pondTool = await PondTools.create({
+                name: inputs.name,
                 condition: inputs.condition,
                 idEmployee: data.id,
                 nameEmployee: employeeData.name
