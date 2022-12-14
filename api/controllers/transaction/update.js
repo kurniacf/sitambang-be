@@ -17,7 +17,7 @@ module.exports = {
         },
         statusPayment: {
             type: 'string',
-            enum: ['confirmed', 'canceled', 'pending'],
+            enum: ['confirmed', 'cancelled', 'pending'],
         },
         paymentImage: {
             type: 'string',
@@ -101,10 +101,10 @@ module.exports = {
             } else {
                 if (inputs.statusPayment === 'confirmed') {
                     await Stocks.updateOne({ id: inputs.idStock }).set({
-                        stock: stockData.stock - inputs.purchasedStock
+                        totalStocks: stockData.totalStocks - inputs.purchasedStock
                     });
                 }
-
+                
                 transaction = await Transaction.updateOne({ id: inputs.idTransaction }).set({
                     totalPayment: stockData.priceStock * inputs.purchasedStock,
                     paymentMethod: inputs.paymentMethod,

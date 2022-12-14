@@ -20,7 +20,7 @@ module.exports = {
         },
         statusPayment: {
             type: 'string',
-            isIn: ['confirmed', 'canceled', 'pending'],
+            isIn: ['confirmed', 'cancelled', 'pending'],
             defaultsTo: 'pending',
             columnName: 'status_payment'
         },
