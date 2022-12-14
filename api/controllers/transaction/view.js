@@ -38,12 +38,27 @@ module.exports = {
             let idStock = this.req.param('id');
 
             if(idStock) {
-                let transactionData = await Transaction.find({ idBuyer: idStock });
+                if(data.role === 'buyer') {
+                    let transactionData = await Transaction.find({ idBuyer: data.id });
 
-                return exits.success({
-                    message: `Success view transaction`,
-                    data: transactionData
-                });
+                    if (idStock !== data.id) {
+                        return exits.notRole({
+                            message: 'Dont not access role'
+                        });
+                    }
+
+                    return exits.success({
+                        message: `Success view transaction buyer`,
+                        data: transactionData
+                    });
+                } else {
+                    let transactionData = await Transaction.find({ idBuyer: idStock });
+
+                    return exits.success({
+                        message: `Success view transaction`,
+                        data: transactionData
+                    });
+                }
             } else {
                 if(data.role === 'buyer') {
                     let transactionData = await Transaction.find({ idBuyer: data.id });
