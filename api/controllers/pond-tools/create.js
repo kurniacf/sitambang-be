@@ -46,7 +46,7 @@ module.exports = {
                 name: inputs.name,
                 condition: inputs.condition,
                 employeeID: data.id
-            });
+            }).fetch();
 
             return exits.success({
                 message: `Success create pond tool`,
