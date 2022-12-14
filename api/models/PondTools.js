@@ -13,10 +13,9 @@ module.exports = {
             required: true,
             columnName: 'name'
         },
-        employeeID: {
-            type: 'number',
-            required: true,
-            columnName: 'employee_id',
+        idEmployee: {
+            model: 'employee',
+            columnName: 'id_employee',
         },
         condition: {
             type: 'string',
