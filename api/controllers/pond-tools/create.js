@@ -11,6 +11,9 @@ module.exports = {
         },
         condition: {
             type: 'string',
+        },
+        idEmployee: {
+            type: 'number',
         }
     },
 
@@ -23,9 +26,9 @@ module.exports = {
             statusCode: 404,
             description: 'Error',
         },
-        notEmployee: {
+        notRole: {
             statusCode: 404,
-            description: 'Role not employee'
+            description: 'Role not access'
         }
     },
 
@@ -36,26 +39,27 @@ module.exports = {
             let token = credential[1];
             const data = await sails.helpers.decodeJwtToken(token);
 
+            let employeeData;
+
             if (data.role === 'buyer') {
-                return exits.notEmployee({
+                return exits.notRole({
                     message: 'Role not employee or admin'
                 });
+            } else if (data.role === 'employee') {
+                employeeData = await Employee.findOne({ id: data.id });
+            } else {
+                employeeData = await Employee.findOne({ id: inputs.idEmployee });
             }
-
-            let employeeData = await Employee.findOne({ id: data.id });
-            let nameEmployee = employeeData.name;
 
             let pondTool = await PondTools.create({
                 name: inputs.name,
                 condition: inputs.condition,
-                idEmployee: data.id
+                idEmployee: data.id,
+                nameEmployee: employeeData.name
             }).fetch();
-
-            pondTool.nameEmployee = nameEmployee;
 
             return exits.success({
                 message: `Success create pond tool`,
-                //data: token
                 data: pondTool
             });
 

@@ -37,7 +37,7 @@ module.exports = {
                 });
             }
 
-            let employeeData = await Employee.findOne({ id: data.id });
+            let employeeData = await Employee.find;
             let nameEmployee = employeeData.name;
 
             if (idPondTool) {
