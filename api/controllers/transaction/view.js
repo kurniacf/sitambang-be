@@ -38,6 +38,13 @@ module.exports = {
             let idStock = this.req.param('id');
 
             if(idStock) {
+                let transactionData = await Transaction.find({ idBuyer: idStock });
+
+                return exits.success({
+                    message: `Success view transaction`,
+                    data: transactionData
+                });
+            } else {
                 if(data.role === 'buyer') {
                     let transactionData = await Transaction.find({ idBuyer: data.id });
 
@@ -45,15 +52,8 @@ module.exports = {
                         message: `Success view transaction buyer`,
                         data: transactionData
                     });
-                } else {
-                    let transactionData = await Transaction.find({ idBuyer: idStock });
-
-                    return exits.success({
-                        message: `Success view transaction`,
-                        data: transactionData
-                    });
                 }
-            } else {
+
                 let transactionData = await Transaction.find();
 
                 return exits.success({
