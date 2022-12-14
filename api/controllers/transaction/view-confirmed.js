@@ -42,21 +42,30 @@ module.exports = {
 
                 if (!transactionData) {
                     return exits.error({
-                        message: 'Stock not found'
+                        message: 'Transaction not found'
                     });
                 }
 
                 return exits.success({
-                    message: `Success view stock`,
+                    message: `Success view Transaction`,
                     data: transactionData
                 });
             } else {
-                let transactionData = await Stocks.find({idBuyer: data.id, statusPayment: 'confirmed'});
+                if(data.role === 'buyer') {
+                    let transactionData = await Transaction.find({idBuyer: data.id, statusPayment: 'confirmed'});
 
-                return exits.success({
-                    message: `Success view all stocks`,
-                    data: transactionData
-                });
+                    return exits.success({
+                        message: `Success view all Transaction`,
+                        data: transactionData
+                    });
+                } else {
+                    let transactionData = await Transaction.find({statusPayment: 'confirmed'});
+
+                    return exits.success({
+                        message: `Success view all Transaction`,
+                        data: transactionData
+                    });
+                }
             }
         } catch (error) {
             return exits.error({
