@@ -49,11 +49,13 @@ module.exports = {
 
             await PondTools.updateOne({ id: inputs.id }).set({
                 name: inputs.name,
-                condition: inputs.condition,
-                nameEmployee: employeeData.name
+                condition: inputs.condition
             });
 
             let pondTool = await PondTools.findOne({ id: inputs.id });
+
+            let nameEmployee = employeeData.name;
+            pondTool.nameEmployee = nameEmployee;
 
             return exits.success({
                 message: `Success update pond tool`,

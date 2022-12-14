@@ -20,10 +20,6 @@ module.exports = {
         condition: {
             type: 'string',
             columnName: 'condition'
-        },
-        nameEmployee: {
-            type: 'string',
-            columnName: 'name_employee'
         }
     },
 };

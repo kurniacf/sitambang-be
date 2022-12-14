@@ -37,8 +37,12 @@ module.exports = {
                 });
             }
 
+            let employeeData = await Employee.findOne({ id: data.id });
+            let nameEmployee = employeeData.name;
+
             if (idPondTool) {
                 let pondTool = await PondTools.findOne({ id: idPondTool });
+                pondTool.nameEmployee = nameEmployee;
 
                 if (!pondTool) {
                     return exits.error({
@@ -52,6 +56,9 @@ module.exports = {
                 }
             } else {
                 let pondTools = await PondTools.find();
+                pondTools.forEach(pondTool => {
+                    pondTool.nameEmployee = nameEmployee;
+                });
 
                 return exits.success({
                     message: `Success view all pond`,
