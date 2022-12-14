@@ -46,7 +46,7 @@ module.exports = {
                 } else {
                     pondTool = await PondTools.find();
                 }
-            } 
+            }
 
             return exits.success({
                 message: `Success view pond`,

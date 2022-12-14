@@ -27,7 +27,8 @@ module.exports.routes = {
     'POST /employee/login': 'employee/login',
     'POST /employee/forgot-password': 'employee/forgot-password',
     'POST /employee/reset-password': 'employee/reset-password',
-    'POST /employee/view': 'employee/view',
+    'GET /employee/view': 'employee/view',
+    'GET /employee/view/:id': 'employee/view',
     'POST /employee/update': 'employee/update',
     'POST /employee/delete': 'employee/delete',
 
@@ -36,7 +37,8 @@ module.exports.routes = {
     'POST /buyer/login': 'buyer/login',
     'POST /buyer/forgot-password': 'buyer/forgot-password',
     'POST /buyer/reset-password': 'buyer/reset-password',
-    'POST /buyer/view': 'buyer/view',
+    'GET /buyer/view': 'buyer/view',
+    'GET /buyer/view/:id': 'buyer/view',
     'POST /buyer/update': 'buyer/update',
     'POST /buyer/delete': 'buyer/delete',
 

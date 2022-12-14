@@ -5,9 +5,6 @@ module.exports = {
     description: 'View Employee',
 
     inputs: {
-        buyerId: {
-            type: 'number'
-        }
     },
 
     exits: {
@@ -32,25 +29,21 @@ module.exports = {
             let token = credential[1];
             const data = await sails.helpers.decodeJwtToken(token);
 
-            if (!data) {
+            if (data.role !== 'buyer' && data.role !== 'admin' && data.role !== 'employee') {
                 return exits.notRole({
                     message: 'Dont not access role'
                 });
             }
 
-            if (inputs.buyerId) {
+            let idBuyer = this.req.param('id');
+
+            if (idBuyer) {
                 let buyerDB = await Buyer.findOne({ id: inputs.buyerId });
 
-                if (!buyerDB) {
-                    return exits.error({
-                        message: 'Buyer not found'
-                    });
-                } else {
-                    return exits.success({
-                        message: `Success view Buyer`,
-                        data: buyerDB
-                    });
-                }
+                return exits.success({
+                    message: `Success view Buyer`,
+                    data: buyerDB
+                });
             } else {
                 let buyerDB = await Buyer.find();
 
