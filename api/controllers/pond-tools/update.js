@@ -45,18 +45,19 @@ module.exports = {
                 });
             }
 
+            let employeeData = await Employee.findOne({ id: data.id });
+
             await PondTools.updateOne({ id: inputs.id }).set({
                 name: inputs.name,
-                condition: inputs.condition
+                condition: inputs.condition,
+                nameEmployee: employeeData.name
             });
 
             let pondTool = await PondTools.findOne({ id: inputs.id });
 
-            let employeeData = await Employee.findOne({ id: data.id });
-
             return exits.success({
                 message: `Success update pond tool`,
-                data: {pondTool, employeeData}
+                data: pondTool
             });
 
         } catch (error) {

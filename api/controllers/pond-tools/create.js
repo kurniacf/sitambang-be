@@ -47,13 +47,14 @@ module.exports = {
             let pondTool = await PondTools.create({
                 name: inputs.name,
                 condition: inputs.condition,
-                idEmployee: data.id
+                idEmployee: data.id,
+                employeeName: employeeData.name
             }).fetch();
 
             return exits.success({
                 message: `Success create pond tool`,
                 //data: token
-                data: {pondTool, employeeData}
+                data: pondTool
             });
 
         } catch (error) {
