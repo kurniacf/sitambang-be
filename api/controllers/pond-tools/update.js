@@ -52,9 +52,11 @@ module.exports = {
 
             let pondTool = await PondTools.findOne({ id: inputs.id });
 
+            let employeeData = await Employee.findOne({ id: data.id });
+
             return exits.success({
                 message: `Success update pond tool`,
-                data: pondTool
+                data: {pondTool, employeeData}
             });
 
         } catch (error) {

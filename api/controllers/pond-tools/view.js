@@ -30,6 +30,7 @@ module.exports = {
             const data = await sails.helpers.decodeJwtToken(token);
 
             let idPondTool = this.req.param('id');
+            let employeeData = await Employee.findOne({ id: data.id });
 
             if (data.role !== 'employee' && data.role !== 'admin' && data.role !== 'buyer') {
                 return exits.notRole({
@@ -47,7 +48,7 @@ module.exports = {
                 } else {
                     return exits.success({
                         message: `Success view pond`,
-                        data: pondTool
+                        data: {pondTool, employeeData}
                     });
                 }
             } else {
@@ -55,7 +56,7 @@ module.exports = {
 
                 return exits.success({
                 message: `Success view all pond`,
-                data: pondTools
+                data: {pondTools, employeeData}
                 });
             }
         } catch (error) {
