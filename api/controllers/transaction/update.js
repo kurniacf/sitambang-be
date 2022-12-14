@@ -104,7 +104,7 @@ module.exports = {
                         totalStocks: stockData.totalStocks - inputs.purchasedStock
                     });
                 }
-                
+
                 transaction = await Transaction.updateOne({ id: inputs.idTransaction }).set({
                     totalPayment: stockData.priceStock * inputs.purchasedStock,
                     paymentMethod: inputs.paymentMethod,
