@@ -23,7 +23,7 @@ module.exports = {
         },
         nameEmployee: {
             type: 'string',
-            columnName: 'name_employee'
+            columnName: 'name_employee',
         }
     },
 };

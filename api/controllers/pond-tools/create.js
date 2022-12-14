@@ -47,7 +47,7 @@ module.exports = {
                 });
             } else if (data.role === 'employee') {
                 employeeData = await Employee.findOne({ id: data.id });
-            } else {
+            } else if (data.role === 'admin') {
                 employeeData = await Employee.findOne({ id: inputs.idEmployee });
             }
 
