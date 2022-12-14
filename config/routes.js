@@ -62,4 +62,8 @@ module.exports.routes = {
     'GET /transaction/view/:id_transaction&:id_buyer': 'transaction/view',
     'GET /transaction/view-confirmed/': 'transaction/view-confirmed',
     'GET /transaction/view-confirmed/:id_buyer': 'transaction/view-confirmed',
+    'GET /transaction/view-pending/': 'transaction/view-pending',
+    'GET /transaction/view-pending/:id_buyer': 'transaction/view-pending',
+    'GET /transaction/view-cancelled/': 'transaction/view-cancelled',
+    'GET /transaction/view-cancelled/:id_buyer': 'transaction/view-cancelled',
 };
