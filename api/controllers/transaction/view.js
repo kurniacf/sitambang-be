@@ -66,6 +66,12 @@ module.exports = {
                 }
 
                 if(idBuyer) {
+                    if(data.role === 'buyer') {
+                        return exits.notRole({
+                            message: 'Dont not access role. Only Admin and Employee'
+                        });
+                    }
+
                     let transactionData = await Transaction.find({ idBuyer: idBuyer });
 
                     return exits.success({

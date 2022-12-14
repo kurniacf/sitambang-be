@@ -38,6 +38,12 @@ module.exports = {
             let idBuyer = this.req.param('id_buyer');
 
             if (idBuyer) {
+                if(data.role === 'buyer') {
+                    return exits.notRole({
+                        message: 'Dont not access role. Only Admin and Employee'
+                    });
+                }
+
                 let transactionData = await Transaction.find({ idBuyer: idBuyer, statusPayment: 'confirmed' });
 
                 if (!transactionData) {
