@@ -47,7 +47,7 @@ module.exports = {
                 }
 
                 return exits.success({
-                    message: `Success view Transaction`,
+                    message: `Success view Transaction confirmed with id buyer`,
                     data: transactionData
                 });
             } else {
@@ -55,14 +55,14 @@ module.exports = {
                     let transactionData = await Transaction.find({idBuyer: data.id, statusPayment: 'confirmed'});
 
                     return exits.success({
-                        message: `Success view all Transaction`,
+                        message: `Success view all Transaction confirmed by buyer`,
                         data: transactionData
                     });
                 } else {
                     let transactionData = await Transaction.find({statusPayment: 'confirmed'});
 
                     return exits.success({
-                        message: `Success view all Transaction`,
+                        message: `Success view all Transaction confirmed by employee or Admin`,
                         data: transactionData
                     });
                 }
