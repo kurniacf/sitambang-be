@@ -42,6 +42,8 @@ module.exports = {
                 });
             }
 
+            let employeeData = await Employee.findOne({ id: data.id });
+
             let pondTool = await PondTools.create({
                 name: inputs.name,
                 condition: inputs.condition,
@@ -51,7 +53,7 @@ module.exports = {
             return exits.success({
                 message: `Success create pond tool`,
                 //data: token
-                data: pondTool
+                data: {pondTool, employeeData}
             });
 
         } catch (error) {
